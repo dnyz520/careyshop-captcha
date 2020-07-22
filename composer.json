@@ -20,7 +20,7 @@
         ]
     },
     "extra": {
-        "think": {
+        "careyshop": {
             "services": [
                 "careyshop\\captcha\\CaptchaService"
             ],
