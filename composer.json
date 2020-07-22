@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "careyshop\\captcha\\": "src/"
+            "careyshop\\": "src/"
         },
         "files": [
             "src/helper.php"
@@ -22,9 +22,6 @@
     },
     "extra": {
         "think": {
-            "services": [
-                "careyshop\\captcha\\CaptchaService"
-            ],
             "config":{
                 "captcha": "src/config.php"
             }            
