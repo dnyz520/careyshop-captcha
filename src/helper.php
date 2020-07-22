@@ -1,12 +1,12 @@
 <?php
 
-use careyshop\captcha\facade\Captcha;
-use think\facade\Route;
 use think\Response;
+use think\facade\Route;
+use careyshop\captcha\facade\Captcha;
 
 /**
  * @param string $config
- * @return \think\Response
+ * @return Response
  */
 function captcha($config = null): Response
 {
