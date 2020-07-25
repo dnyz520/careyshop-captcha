@@ -133,7 +133,7 @@ class Captcha
 
         $hash = password_hash($key, PASSWORD_BCRYPT, ['cost' => 10]);
 
-        if ($key_id || $this->cacheType !== 'session') {
+        if ($key_id && $this->cacheType === 'cache') {
             $this->cache->set($key_id, [
                 'key'    => $hash,
                 'create' => time(),
@@ -163,7 +163,7 @@ class Captcha
             return '验证码不能为空';
         }
 
-        if ($key_id || $this->cacheType !== 'session') {
+        if ($key_id && $this->cacheType === 'cache') {
             $result = $this->cache->get($key_id);
             $result && $this->cache->delete($key_id);
         } else {
