@@ -163,7 +163,7 @@ class Captcha
             return '验证码不能为空';
         }
 
-        if ($key_id && $this->cacheType === 'cache') {
+        if ($key_id || $this->cacheType === 'cache') {
             $result = $this->cache->get($key_id);
             $result && $this->cache->delete($key_id);
         } else {
@@ -171,16 +171,16 @@ class Captcha
             $result && $this->session->delete('captcha');
         }
 
-        if (is_null($result)) {
-            return '验证码未创建';
-        }
-
-        if (!isset($result['create']) || time() - $result['create'] > $this->expire) {
-            return '验证码过期';
+        if (is_null($result) || !isset($result['create']) || time() - $result['create'] > $this->expire) {
+            return '验证码不存在或已过期';
         }
 
         $code = mb_strtolower($code, 'UTF-8');
-        return password_verify($code, $result['key']);
+        if (!password_verify($code, $result['key'])) {
+            return '验证码输入错误';
+        }
+
+        return true;
     }
 
     /**
